@@ -11,12 +11,12 @@ try {
     $stmt->execute();
     echo "<script>
             alert('Retirado com sucesso!');
-            window.location.href = 'index.html';
+            window.location.href = 'index.php';
         </script>";
 } catch (PDOException $e) {
     echo "<script>
             alert('Erro ao inserir: " . addslashes($e->getMessage()) . "');
-            window.location.href = 'index.html';
+            window.location.href = 'index.php';
           </script>";
 }
 //if (mysqli_query($conn, $query)) {

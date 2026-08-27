@@ -8,21 +8,21 @@ $valor = $_POST['valor'];
 $query = "INSERT INTO material_manutencao (nm_item, ds_tipo, qt_itens, vl_unitario) VALUES (:nome, :tipo, :quant, :valor);";
 
 try {
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(':nome', $nome);
-    $stmt->bindParam(':tipo', $tipo);
-    $stmt->bindParam(':quant', $quant);
-    $stmt->bindParam(':valor', $valor);
+  $stmt = $conn->prepare($query);
+  $stmt->bindParam(':nome', $nome);
+  $stmt->bindParam(':tipo', $tipo);
+  $stmt->bindParam(':quant', $quant);
+  $stmt->bindParam(':valor', $valor);
 
-    $stmt->execute();
-    echo "<script>
+  $stmt->execute();
+  echo "<script>
             alert('Inserido com sucesso!');
-            window.location.href = 'index.html';
+            window.location.href = 'index.php';
           </script>";
 } catch (PDOException $e) {
-    echo "<script>
+  echo "<script>
             alert('Erro ao inserir: " . addslashes($e->getMessage()) . "');
-            window.location.href = 'index.html';
+            window.location.href = 'index.php';
           </script>";
 }
 
