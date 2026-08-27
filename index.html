@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventarium SHB</title>
+</head>
+<body>
+    <h2>Inserir material</h2>
+    <form method="POST" action="insert.php">
+        <p>Nome do item</p>
+        <input type="text" placeholder="Nome do item..." name="nome">
+        <p>Tipo do item</p>
+        <input type="text" placeholder="tipo do item..." name="tipo">
+        <p>Quantidade</p>
+        <input type="text" placeholder="Quantidade..." name="quantidade">
+        <p>Valor Unitário</p>
+        <input type="text" placeholder="Valor..." name="valor">
+        <input type="submit" value="Guardar">
+    </form>
+
+    <h2>Saída de material</h2>
+    <form method="POST" action="delete.php">
+        <p>Cód do item</p>
+        <input type="text" placeholder="Código do item..." name="codigo">
+        <input type="submit" value="Retirada">
+    </form>
+
+</body>
+</html> 

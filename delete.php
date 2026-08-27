@@ -1,0 +1,28 @@
+<?php
+include('conexao.php');
+$cod = $_POST['codigo'];
+
+$query = "DELETE FROM material_manutencao WHERE cd_codigo = :cod ;";
+
+try {
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":cod", $cod);
+
+    $stmt->execute();
+    echo "<script>
+            alert('Retirado com sucesso!');
+            window.location.href = 'index.html';
+        </script>";
+} catch (PDOException $e) {
+    echo "<script>
+            alert('Erro ao inserir: " . addslashes($e->getMessage()) . "');
+            window.location.href = 'index.html';
+          </script>";
+}
+//if (mysqli_query($conn, $query)) {
+//  echo "Deletado com sucesso";
+//} else {
+//  echo "Erro" . mysqli_error($conn);
+//}
+//mysqli_close($conn);
+?>
