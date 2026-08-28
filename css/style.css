@@ -2,18 +2,51 @@ body{
     margin:0;
     padding: 0;
     font-family:Arial, Helvetica, sans-serif;
-    background-color: #b8c4cf;
+    background-image: url("../img/LogoSHB.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
-
 /* ================= Lista =================== */
 
 #lista{
     display: flex;
     flex-direction: column;
-    text-align: center;
+    align-items: center;
     justify-content: center;
+    position: relative;
 }
 
+#div-btn-funcao{
+    margin:0;
+    align-self: flex-end;
+    margin-right: 10%;
+    width:20%;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+
+}
+
+#div-btn-funcao .botao{
+    width:40%;
+    padding: 3%;
+    margin:0;
+    border-radius: 10px;
+}
+
+#btn-cancelar{
+    width:40%;
+    padding: 2%;
+    margin:0;
+    border-radius: 10px;
+}
+table{
+    width: 80%;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
 
 tbody{
     width: 100%;
@@ -27,7 +60,7 @@ tbody{
 tr{
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
 }
 
 td{
@@ -55,39 +88,128 @@ td p{
 
 /* ================= Form Insert =================== */
 
+#form-insert{
+    display: none;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.3);
+    z-index:100;
+    background-color: #fff;
+    width: 30%;
+    padding: 2%;
+    border-radius: 20px;
+    text-align: center;
+    flex-direction: column;
+}
+#form-insert.visivel{
+    display: flex;
+}
+
+#form-insert h2{
+    margin:0;
+}
+
 form 
 {
-    margin:0;
-    background-color: #fff;
+    margin:20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap:10px;
-    padding: 1%;
-    width: 40%;
-    border-radius: 20px;
 }
 
 form p{
     margin:0;
 }
 
+#div-btn-form{
+    margin:0;
+    align-self: flex-end;
+    margin-right: 5%;
+    width:70%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+#div-btn-form .botao{
+    align-self: flex-end;
+    width:40%;
+    padding: 3%;
+    margin:0;
+    border-radius: 10px;
+}
+
+#btn-cancelar-inserir,
+#btn-cancelar-remover{
+    background-color: #aa3434;
+}
+#btn-cancelar-inserir:hover,
+#btn-cancelar-remover:hover{
+    background-color: #641919;
+}
+
 input{
     border: 2px solid #85898d;
-    padding: 2%;
-    width: 50%;
+    padding: 3%;
+    width: 70%;
     border-radius:10px;
 }
 
 .botao{
-    background-color: #d18ab6;
+    background-color: #4273cf;
     border: none;
     transition: background-color 0.5s;
     font-weight: bold;
+    color: #fff;
+    margin: 10px;
 }
 
 .botao:hover{
-    background-color: #664158;
-    color: #fff;
+    background-color: #264275;
+}
+
+#overlay{
+    display:none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 99;
+}
+
+#overlay.visivel{
+    display: block;
+}
+
+
+/* ================= Form Remove =================== */
+
+#form-remove{
+    display:none;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.3);
+    z-index:100;
+    background-color: #fff;
+    width: 30%;
+    padding: 2%;
+    border-radius: 20px;
+    text-align: center;
+    flex-direction: column;
+}
+
+#form-remove.visivel{
+    display: flex;
+}
+
+#form-remove h2{
+    margin:0;
 }
