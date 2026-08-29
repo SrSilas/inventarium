@@ -25,7 +25,6 @@ body{
     display: flex;
     gap: 20px;
     justify-content: center;
-
 }
 
 #div-btn-funcao .botao{
@@ -86,6 +85,51 @@ td p{
     justify-content: center;
 }
 
+.btn-icon{
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.btn-icon img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+/* ================= Filtro =================== */
+#div-filtro{
+    display: flex;
+    gap:10px;
+    width:79%;
+    margin: 20px;
+}
+
+#filtro-nome{
+    width:65%;
+    padding: 2%;
+}
+
+#filtro-tipo{
+    width: 10%;
+    padding: 2%;
+}
+
+#div-btn-filtro{
+    margin:0;
+    margin-right: 0%;
+    width:20%;
+    display: flex;
+    gap: 0px;
+    justify-content: center;
+}
+
+.botao{
+    width:50%;
+    padding: 3%;
+    margin:0;
+    border-radius: 10px;
+}
 /* ================= Form Insert =================== */
 
 #form-insert{
@@ -156,6 +200,13 @@ input{
     border: 2px solid #85898d;
     padding: 3%;
     width: 70%;
+    border-radius:10px;
+}
+
+select{
+    border: 2px solid #85898d;
+    padding: 3%;
+    width: 78%;
     border-radius:10px;
 }
 

@@ -7,12 +7,19 @@ $query = "DELETE FROM material_manutencao WHERE cd_codigo = :cod ;";
 try {
     $stmt = $conn->prepare($query);
     $stmt->bindParam(":cod", $cod);
-
     $stmt->execute();
-    echo "<script>
+
+    if ($stmt->rowCount() > 0) {
+        echo "<script>
             alert('Retirado com sucesso!');
             window.location.href = 'index.php';
         </script>";
+    } else {
+        echo "<script>
+            alert('Produto não encontrado. Verifique o código informado. ');
+            window.location.href = 'index.php';
+        </script>";
+    }
 } catch (PDOException $e) {
     echo "<script>
             alert('Erro ao inserir: " . addslashes($e->getMessage()) . "');
