@@ -18,14 +18,17 @@ $conn = null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="./icons/pencil.svg">
+    <link rel="icon" type="image/svg+xml" href="img/LogoSHB.jpg">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js" defer></script>
     <title>Inventarium SHB</title>
 </head>
 
 <body>
-    <img src="img/LogoSHB.jpg" alt="logo">
+    <header>
+        <img src="img/logoInvent.png" alt="">
+    </header>
+    <!------------------ Forms -------------------->
     <div id="form-insert">
         <h2>Inserir material</h2>
         <form method="POST" action="insert.php">
@@ -60,8 +63,31 @@ $conn = null;
             </div>
         </form>
     </div>
+    <div id="form-update">
+        <h2>Editar material</h2>
+        <form method="POST" action="update.php">
+            <input type="hidden" name="codigo" id="update-codigo">
+            <p>Nome do item</p>
+            <input type="text" name="nome" id="update-nome" required>
+            <p>Tipo do item</p>
+            <select name="tipo" id="update-tipo" required>
+                <option value="">Selecione o tipo</option>
+                <option value="Elétrico">Elétrico</option>
+                <option value="Hidráulico">Hidráulico</option>
+                <option value="Insumos">Insumos</option>
+            </select>
+            <p>Quantidade</p>
+            <input type="number" name="quantidade" id="update-quantidade" min="0" step="1" required>
+            <p>Valor Unitário</p>
+            <input type="number" name="valor" id="update-valor" min="0" step="0.01" required>
+            <div id="div-btn-form">
+                <input type="submit" value="Salvar" class="botao">
+                <button type="button" class="botao" id="btn-cancelar-update">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <!---------------------------- Lista de materiais do banco --------------------------->
     <div id="lista">
-        <h1>Materiais em estoque</h1>
         <div id="div-filtro">
             <input type="text" id="filtro-nome" placeholder="Buscar por nome">
             <select id="filtro-tipo">
@@ -75,39 +101,45 @@ $conn = null;
                 <button type="button" id="btn-limpar-filtro" class="botao">Limpar</button>
             </div>
         </div>
+        <h2>Materiais em estoque</h2>
         <div id="div-btn-funcao">
             <button class="botao" id="btn-adicionar">Adicionar</button>
-            <button class="botao" id="btn-remover">Remover</button>
+            <button class="botao" id="btn-remover">Retirar</button>
         </div>
         <table>
             <tbody id="corpo-tabela">
                 <?php foreach ($itens as $item): ?>
-                    <tr>
-                        <td>
-                            <div class="item">
-                                <p>Código</p>
-                                <?= $item['cd_codigo'] ?>
-                            </div>
-                            <div class="item">
-                                <p>Item</p>
-                                <?= $item['nm_item'] ?>
-                            </div>
-                            <div class="item">
-                                <p>Tipo</p>
-                                <?= $item['ds_tipo'] ?>
-                            </div>
-                            <div class="item">
-                                <p>Quantidade</p>
-                                <?= $item['qt_itens'] ?>
-                            </div>
-                            <div class="item">
-                                <p>Valor Unitário</p>
-                                <?= number_format($item['vl_unitario'], 2, ',', '.') ?>
-                            </div>
-                            <div class="item">
-                                <button type="button" class="btn-icon">
-                                    <img src="icons/pencil.svg" alt="Editar">
-                                </button>
+                <tr>
+                    <td>
+                        <div class="item">
+                            <p>Código</p>
+                            <?= $item['cd_codigo'] ?>
+                        </div>
+                        <div class="item">
+                            <p>Item</p>
+                            <?= $item['nm_item'] ?>
+                        </div>
+                        <div class="item">
+                            <p>Tipo</p>
+                            <?= $item['ds_tipo'] ?>
+                        </div>
+                        <div class="item">
+                            <p>Quantidade</p>
+                            <?= $item['qt_itens'] ?>
+                        </div>
+                        <div class="item">
+                            <p>Valor Unitário</p>
+                            <?= number_format($item['vl_unitario'], 2, ',', '.') ?>
+                        </div>
+                        <div class="item">
+                            <button type="button" class="btn-icon btn-editar" data-codigo="<?= $item['cd_codigo'] ?>"
+                                data-nome="<?= $item['nm_item'] ?>" data-tipo="<?= $item['ds_tipo'] ?>"
+                                data-quantidade="<?= $item['qt_itens'] ?>" data-valor="<?= $item['vl_unitario'] ?>">
+                                <img src="icons/pencil.svg" alt="Editar">
+                            </button>
+                            <!-- <button type="button" class="btn-icon btn-excluir" data-codigo="<?= $item['cd_codigo'] ?>">
+                                <img src="icons/trash.svg" alt="Editar">
+                            </button> -->
                             </div>
                         </td>
                     </tr>

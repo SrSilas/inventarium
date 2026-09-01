@@ -1,6 +1,7 @@
 const btnAdicionar = document.getElementById('btn-adicionar');
 const btnCancelarInsert = document.getElementById('btn-cancelar-inserir');
 const btnCancelarRemover = document.getElementById('btn-cancelar-remover');
+const btnCancelarUpdate = document.getElementById('btn-cancelar-update');
 const btnRemover = document.getElementById('btn-remover');
 const formInsert = document.getElementById('form-insert');
 const formRemover = document.getElementById('form-remove');
@@ -23,6 +24,11 @@ btnCancelarInsert.addEventListener('click', function(){
 
 btnCancelarRemover.addEventListener('click', function(){
     formRemover.classList.remove('visivel');
+    overlay.classList.remove('visivel');
+});
+
+btnCancelarUpdate.addEventListener('click', function(){
+    formUpdate.classList.remove('visivel');
     overlay.classList.remove('visivel');
 });
 
@@ -109,3 +115,27 @@ btnLimparFiltro.addEventListener('click', function() {
     btnBuscar.click();
 });
 
+
+// Update ~~~~~~~~~~~~~~~~~
+
+const botoesEditar = document.querySelectorAll('.btn-editar');
+const formUpdate = document.getElementById('form-update');
+
+const UpdateCodigo = document.getElementById('update-codigo');
+const updateNome = document.getElementById('update-nome');
+const updateTipo = document.getElementById('update-tipo');
+const updateQuantidade = document.getElementById('update-quantidade');
+const updateValor = document.getElementById('update-valor');
+
+botoesEditar.forEach(function(botao) {
+    botao.addEventListener('click', function(){
+        UpdateCodigo.value = this.dataset.codigo;
+        updateNome.value = this.dataset.nome;
+        updateTipo.value = this.dataset.tipo;
+        updateQuantidade.value = this.dataset.quantidade;
+        updateValor.value = this.dataset.valor;
+
+        formUpdate.classList.toggle('visivel');
+        overlay.classList.toggle('visivel');
+    });
+});

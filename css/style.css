@@ -1,11 +1,27 @@
 body{
     margin:0;
     padding: 0;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:sans-serif;
     background-image: url("../img/LogoSHB.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+header{
+    margin:0;
+    margin-bottom: 10px;
+    text-align: center;
+    background-color: #fdc9bb;
+}
+h1{
+    margin:0;
+    font-weight: bold;
+}
+
+header img{
+    width: 20%;
+    margin:0;
 }
 /* ================= Lista =================== */
 
@@ -103,6 +119,10 @@ td p{
     gap:10px;
     width:79%;
     margin: 20px;
+    padding: 2%;
+    border-radius:20px;
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.3);
+    background-color: #fff;
 }
 
 #filtro-nome{
@@ -188,11 +208,13 @@ form p{
 }
 
 #btn-cancelar-inserir,
-#btn-cancelar-remover{
+#btn-cancelar-remover,
+#btn-cancelar-update{
     background-color: #aa3434;
 }
 #btn-cancelar-inserir:hover,
-#btn-cancelar-remover:hover{
+#btn-cancelar-remover:hover
+#btn-cancelar-update:hover{
     background-color: #641919;
 }
 
@@ -264,3 +286,25 @@ select{
 #form-remove h2{
     margin:0;
 }
+
+/* ================= Form Remove =================== */
+#form-update{
+    display: none;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.3);
+    z-index:100;
+    background-color: #fff;
+    width: 30%;
+    padding: 2%;
+    border-radius: 20px;
+    text-align: center;
+    flex-direction: column;
+}
+
+#form-update.visivel{
+    display: flex;
+}
+
