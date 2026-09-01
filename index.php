@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['usuario_id'])) {
+    header('Location: login.html');
+    exit;
+}
+
 include('conexao.php');
 
 $query = "SELECT * FROM material_manutencao";
@@ -27,6 +33,7 @@ $conn = null;
 <body>
     <header>
         <img src="img/logoInvent.png" alt="">
+        <a href="logout.php" class="botao" id="btn-logout">Sair</a>
     </header>
     <!------------------ Forms -------------------->
     <div id="form-insert">
