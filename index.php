@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
+
 if (!isset($_SESSION['usuario_id'])) {
     header('Location: login.html');
     exit;
@@ -35,6 +40,7 @@ $conn = null;
         <img src="img/logoInvent.png" alt="">
         <a href="logout.php" class="botao" id="btn-logout">Sair</a>
     </header>
+    <main>
     <!------------------ Forms -------------------->
     <div id="form-insert">
         <h2>Inserir material</h2>
@@ -104,8 +110,14 @@ $conn = null;
                 <option value="Insumos">Insumos</option>
             </select>
             <div id="div-btn-filtro">
-                <button type="button" id="btn-buscar" class="botao">Buscar</button>
-                <button type="button" id="btn-limpar-filtro" class="botao">Limpar</button>
+                <button type="button" id="btn-buscar" class="botao">
+                    <span class="texto-botao">Buscar</span>
+                    <img src="icons/search.svg" alt="Buscar" class="icone-botao">
+                </button>
+                <button type="button" id="btn-limpar-filtro" class="botao">
+                    <span class="texto-botao">Limpar</span>
+                    <img src="icons/clear.svg" alt="Limpar" class="icone-botao">
+                </button>
             </div>
         </div>
         <h2>Materiais em estoque</h2>
@@ -154,6 +166,10 @@ $conn = null;
             </tbody>
         </table>
     </div>
+    </main>
+    <footer>
+        <p>Created by <a>Israel Silas</a></p>
+    </footer>
 </body>
 
 </html>
