@@ -133,6 +133,9 @@ td p{
     width: 80%;
     padding: 1%;
     justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .btn-icon{
@@ -146,6 +149,11 @@ td p{
   width: 20px;
   height: 20px;
   display: block;
+}
+
+.item-zerado {
+    color: #aa3434;
+    font-weight: bold;
 }
 /* ================= Filtro =================== */
 #div-filtro{
@@ -443,6 +451,11 @@ footer{
         justify-content: center;
         width: 100%;
     }
+    
+    main:has(#lista){
+        justify-content: flex-start;
+    }
+
     header{
         width:100%;
     }
@@ -524,7 +537,7 @@ footer{
         width:100%;
     }
     #lista{
-        margin-top: -40vh;
+        margin-top: flex-start;
     }
     tbody{
         width: 100%;
@@ -550,6 +563,28 @@ footer{
         text-align: center;
     }
 
+    /* Form Insert */
+
+    #form-insert{
+        width: 90%;
+    }
+
+    #div-btn-form{
+        margin-right: 0%;
+        align-self: center;
+    }
+
+    /* Form Delete */
+
+    #form-remove{
+        width:90%;
+    }
+
+    /* Form Update */
+
+    #form-update{
+        width:90%;
+    }
 }
 
 

@@ -12,8 +12,9 @@ $nome = $_POST['nome'];
 $tipo = $_POST['tipo'];
 $quant = $_POST['quantidade'];
 $valor = $_POST['valor'];
+$qtMin = $_POST['qtMin'];
 
-$query = "UPDATE material_manutencao SET nm_item = :nome, ds_tipo = :tipo, qt_itens = :quant, vl_unitario = :valor WHERE cd_codigo = :codigo";
+$query = "UPDATE material_manutencao SET nm_item = :nome, ds_tipo = :tipo, qt_itens = :quant, vl_unitario = :valor, qt_minima = :qtMin WHERE cd_codigo = :codigo";
 
 try {
     $stmt = $conn->prepare($query);
@@ -22,6 +23,7 @@ try {
     $stmt->bindParam(':quant', $quant);
     $stmt->bindParam(':valor', $valor);
     $stmt->bindParam(':codigo', $codigo);
+    $stmt->bindParam('qtMin', $qtMin);
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {

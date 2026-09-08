@@ -58,6 +58,8 @@ $conn = null;
             <input type="number" placeholder="Quantidade" name="quantidade" min="0" step="1" required>
             <p>Valor Unitário</p>
             <input type="number" placeholder="Valor" name="valor" min="0" step="0.01" required>
+            <p>Quantidade Mínima (alerta)</p>
+            <input type="number" name="qt_minima" min="0" step="1" required>
             <div id="div-btn-form">
                 <input type="submit" value="Guardar" class="botao">
                 <button type="button" class="botao" id="btn-cancelar-inserir">Cancelar</button>
@@ -70,6 +72,8 @@ $conn = null;
         <form method="POST" action="delete.php">
             <p>Código do item</p>
             <input type="number" placeholder="Código do item..." name="codigo" min="0" step="1" required>
+            <p>Quantidade a retirar</p>
+            <input type="number" placeholder="Quantidade..." name="quantidade" min="1" step="1" required>
             <div id="div-btn-form">
                 <input type="submit" value="Retirada" class="botao" id="btn-delete">
                 <button type="button" class="botao" id="btn-cancelar-remover">Cancelar</button>
@@ -93,6 +97,8 @@ $conn = null;
             <input type="number" name="quantidade" id="update-quantidade" min="0" step="1" required>
             <p>Valor Unitário</p>
             <input type="number" name="valor" id="update-valor" min="0" step="0.01" required>
+            <p>Quantidade Mínima (alerta)</p>
+            <input type="number" name="qtMin" id="update-qtmin" min="0" step="1" required>
             <div id="div-btn-form">
                 <input type="submit" value="Salvar" class="botao">
                 <button type="button" class="botao" id="btn-cancelar-update">Cancelar</button>
@@ -136,13 +142,13 @@ $conn = null;
                         </div>
                         <div class="item">
                             <p>Item</p>
-                            <?= $item['nm_item'] ?>
+                            <span title="<?= $item['nm_item'] ?>"><?= $item['nm_item'] ?></span>
                         </div>
                         <div class="item">
                             <p>Tipo</p>
                             <?= $item['ds_tipo'] ?>
                         </div>
-                        <div class="item">
+                        <div class="item <?= $item['qt_itens'] == 0 ? 'item-zerado' : '' ?>">
                             <p>Quantidade</p>
                             <?= $item['qt_itens'] ?>
                         </div>
@@ -153,7 +159,7 @@ $conn = null;
                         <div class="item">
                             <button type="button" class="btn-icon btn-editar" data-codigo="<?= $item['cd_codigo'] ?>"
                                 data-nome="<?= $item['nm_item'] ?>" data-tipo="<?= $item['ds_tipo'] ?>"
-                                data-quantidade="<?= $item['qt_itens'] ?>" data-valor="<?= $item['vl_unitario'] ?>">
+                                data-quantidade="<?= $item['qt_itens'] ?>" data-valor="<?= $item['vl_unitario']?>" data-qtmin="<?= $item['qt_minima']?>">
                                 <img src="icons/pencil.svg" alt="Editar">
                             </button>
                             <!-- <button type="button" class="btn-icon btn-excluir" data-codigo="<?= $item['cd_codigo'] ?>">
