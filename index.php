@@ -174,7 +174,7 @@ $conn = null;
     </div>
     </main>
     <footer>
-        <p>Created by <a>Israel Silas</a></p>
+        <p>Created by <a href="https://www.linkedin.com/in/israel-silas-69ba9b1a8">Israel Silas</a></p>
     </footer>
 </body>
 

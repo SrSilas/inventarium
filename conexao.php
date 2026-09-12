@@ -1,12 +1,9 @@
 <?php
-$host = 'localhost';
-$user = 'root';
-$pass = 'root';
-$bd = 'inventario_shb';
-$port = '3306';
+
+require_once 'config.php';
 
 try {
-    $conn = new PDO("mysql:host=$host;port=$port;dbname=$bd;charset=utf8mb4", $user, $pass);
+    $conn = new PDO("mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASS);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die('Erro na conexão: ' . $e->getMessage());
