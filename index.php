@@ -128,7 +128,7 @@ $conn = null;
         </div>
         <h2>Materiais em estoque</h2>
         <div id="div-btn-funcao">
-            <button class="botao" id="btn-adicionar">Adicionar</button>
+            <button class="botao" id="btn-adicionar">Cadastrar</button>
             <button class="botao" id="btn-remover">Retirar</button>
         </div>
         <table>

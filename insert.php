@@ -21,6 +21,16 @@ try {
   $stmt->bindParam(':valor', $valor);
 
   $stmt->execute();
+
+  $codigoNovoItem = $conn->lastInsertId();
+
+  $queryMov = "INSERT INTO movimentacao (cd_item, cd_usuario, tp_movimento, qt_movimentada) VALUES (:cd_item, :cd_usuario, 'entrada', :qt)";
+  $stmtMov = $conn->prepare($queryMov);
+  $stmtMov->bindParam(':cd_item', $codigoNovoItem);
+  $stmtMov->bindParam(':cd_usuario', $_SESSION['usuario_id']);
+  $stmtMov->bindParam(':qt', $quant);
+  $stmtMov->execute();
+
   echo "<script>
             alert('Inserido com sucesso!');
             window.location.href = 'index.php';

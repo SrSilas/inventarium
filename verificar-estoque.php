@@ -17,9 +17,22 @@ try {
     $itensBaixos = $stmt->fetchALL(PDO::FETCH_ASSOC);
 
     if (count($itensBaixos) > 0) {
-        $corpoEmail = "<h2>Itens com estoque baixo</h2><ul>";
+        $corpoEmail = "<div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;'>
+                        <h2 style='background-color: #aa3434; color: #fff; padding: 15px; border-radius: 8px 8px 0 0; margin: 0;'>⚠️ Itens com estoque baixo</h2>
+                        <table style='width: 100%; border-collapse: collapse; margin-top: 10px;'>
+                            <tr style='background-color: #f0f0f0;'>
+                                <th style='padding: 10px; text-align: left; border-bottom: 2px solid #ddd;'>Item</th>
+                                <th style='padding: 10px; text-align: center; border-bottom: 2px solid #ddd;'>Estoque atual</th>
+                                <th style='padding: 10px; text-align: center; border-bottom: 2px solid #ddd;'>Mínimo</th>
+                            </tr>";
+
         foreach ($itensBaixos as $item) {
-            $corpoEmail .= "<li>{$item['nm_item']}: {$item['qt_itens']} (mínimo: {$item['qt_minima']})</li>";
+            $corpoEmail .= "
+        <tr>
+            <td style='padding: 10px; border-bottom: 1px solid #eee;'>{$item['nm_item']}</td>
+            <td style='padding: 10px; text-align: center; border-bottom: 1px solid #eee; color: #aa3434; font-weight: bold;'>{$item['qt_itens']}</td>
+            <td style='padding: 10px; text-align: center; border-bottom: 1px solid #eee;'>{$item['qt_minima']}</td>
+        </tr>";
         }
         $corpoEmail .= "</ul>";
 
@@ -35,7 +48,7 @@ try {
             $mail->Port = EMAIL_PORT;
             $mail->CharSet = 'UTF-8';
 
-            $mail->setFrom('tvsshb@gmail.com', 'Inventarium SHB');
+            $mail->setFrom(EMAIL_USER, 'Inventarium SHB');
             $mail->addAddress('tvsshb@gmail.com');
 
             $mail->isHTML(true);
