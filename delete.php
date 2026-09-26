@@ -7,7 +7,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
 include('conexao.php');
 $cod = $_POST['codigo'];
-$qdtRetirar = $_POST['quantidade'];
+$qdtRetirar = $_POST['quantidade-ret'];
 
 try {
     $queryBusca = "SELECT qt_itens FROM material_manutencao WHERE cd_codigo = :cod";

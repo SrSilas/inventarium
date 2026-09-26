@@ -1,7 +1,13 @@
 <?php
 require('fpdf/fpdf.php');
 require('config.php');
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 include('conexao.php');
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 //Definindo o periodo: mês anterior completo
 $inicio = date('Y-m-01', strtotime('first day of last month'));
@@ -57,6 +63,34 @@ if (!file_exists($pasta)) {
 $caminhoArquivo = $pasta . 'relatorio_' . date('Y_m', strtotime($inicio)) . '.pdf';
 $pdf->Output('F', $caminhoArquivo);
 
-echo "Relatorio gerado: $caminhoArquivo";
+$mail = new PHPMailer(true);
+
+try {
+    $mail->isSMTP();
+    $mail->Host = EMAIL_HOST;
+    $mail->SMTPAuth = true;
+    $mail->Username = EMAIL_USER;
+    $mail->Password = EMAIL_PASS;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = EMAIL_PORT;
+    $mail->CharSet = 'UTF-8';
+
+    $mail->setFrom(EMAIL_USER, 'Inventarium SHB');
+    $mail->addAddress('tvsshb@gmail.com');
+
+    $mail->addAttachment($caminhoArquivo);
+
+    $mail->isHTML(true);
+    $mail->Subject = 'Relatório Mensal de movimentações - Inventarium SHB';
+    $mail->Body = '<p>Segue em anexo o relatório de movimentções do mês.</p>';
+
+    $mail->send();
+    echo "Email enviado com sucesso.";
+} catch (Exception $e) {
+    echo "Erro ao enviar email: {$mail->ErrorInfo}";
+}
+
+$conn = null;
+// echo "Relatorio gerado: $caminhoArquivo";
 
 ?>

@@ -56,7 +56,7 @@ try {
             $mail->Body = $corpoEmail;
 
             $mail->send();
-            echo "Email enviado com suceso.";
+            echo "Email enviado com sucesso.";
         } catch (PDOException $e) {
             echo "Erro ao enviar email: {$mail->ErrorInfo}";
         }

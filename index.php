@@ -71,12 +71,25 @@ $conn = null;
         <h2>Saída de material</h2>
         <form method="POST" action="delete.php">
             <p>Código do item</p>
-            <input type="number" placeholder="Código do item..." name="codigo" min="0" step="1" required>
+            <input type="hidden" placeholder="Código do item..." name="codigo" id="saida-codigo">
             <p>Quantidade a retirar</p>
-            <input type="number" placeholder="Quantidade..." name="quantidade" min="1" step="1" required>
+            <input type="number" placeholder="Quantidade..." name="quantidade-ret" id="saida-quantidade">
             <div id="div-btn-form">
                 <input type="submit" value="Retirada" class="botao" id="btn-delete">
                 <button type="button" class="botao" id="btn-cancelar-remover">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <div id="form-increment">
+        <h2>Adicionar material</h2>
+        <form method="POST" action="adicionar.php">
+            <p>Código do item</p>
+            <input type="hidden" placeholder="Código do item..." name="codigo" id="entrada-codigo">
+            <p>Quantidade a Adicionar</p>
+            <input type="number" placeholder="Quantidade..." name="quantidade-adc" id="entrada-quantidade">
+            <div id="div-btn-form">
+                <input type="submit" value="Acrescentar" class="botao" id="btn-increment">
+                <button type="button" class="botao" id="btn-cancelar-increment">Cancelar</button>
             </div>
         </form>
     </div>
@@ -129,7 +142,6 @@ $conn = null;
         <h2>Materiais em estoque</h2>
         <div id="div-btn-funcao">
             <button class="botao" id="btn-adicionar">Cadastrar</button>
-            <button class="botao" id="btn-remover">Retirar</button>
         </div>
         <table>
             <tbody id="corpo-tabela">
@@ -157,14 +169,16 @@ $conn = null;
                             <?= number_format($item['vl_unitario'], 2, ',', '.') ?>
                         </div>
                         <div class="item">
-                            <button type="button" class="btn-icon btn-editar" data-codigo="<?= $item['cd_codigo'] ?>"
+                            <button type="button" class="btn-icon btn-menu-item" data-codigo="<?= $item['cd_codigo'] ?>"
                                 data-nome="<?= $item['nm_item'] ?>" data-tipo="<?= $item['ds_tipo'] ?>"
                                 data-quantidade="<?= $item['qt_itens'] ?>" data-valor="<?= $item['vl_unitario']?>" data-qtmin="<?= $item['qt_minima']?>">
-                                <img src="icons/pencil.svg" alt="Editar">
+                                <img src="icons/three-dots.svg" alt="Opções">
                             </button>
-                            <!-- <button type="button" class="btn-icon btn-excluir" data-codigo="<?= $item['cd_codigo'] ?>">
-                                <img src="icons/trash.svg" alt="Editar">
-                            </button> -->
+                            <div class="dropdown-menu">
+                                <button type="button" class="dropdown-opcao btn-abrir-editar">Editar</button>
+                                <button type="button" class="dropdown-opcao btn-abrir-entrada">Adicionar</button>
+                                <button type="button" class="dropdown-opcao btn-abrir-saida">Retirar</button>
+                            </div>
                             </div>
                         </td>
                     </tr>

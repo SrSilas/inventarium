@@ -1,25 +1,55 @@
+// ==========================================
+// Declarações globais
+// ==========================================
+
+// Forms e overlay
+const formUpdate = document.getElementById('form-update');
+const formInsert = document.getElementById('form-insert');
+const formRemover = document.getElementById('form-remove');
+const formEntrada = document.getElementById('form-increment');
+const overlay = document.getElementById('overlay');
+
+// Botões de abrir/cancelar
 const btnAdicionar = document.getElementById('btn-adicionar');
 const btnCancelarInsert = document.getElementById('btn-cancelar-inserir');
 const btnCancelarRemover = document.getElementById('btn-cancelar-remover');
+const btnCancelarIncrement = document.getElementById('btn-cancelar-increment');
 const btnCancelarUpdate = document.getElementById('btn-cancelar-update');
-const btnRemover = document.getElementById('btn-remover');
-const formInsert = document.getElementById('form-insert');
-const formRemover = document.getElementById('form-remove');
-const overlay = document.getElementById('overlay');
 
+// Campos de formulário de edição(update)
+const updateCodigo = document.getElementById('update-codigo');
+const saidaCodigo = document.getElementById('saida-codigo');
+const saidaQuantidade = document.getElementById('saida-quantidade');
+const entradaCodigo = document.getElementById('entrada-codigo');
+const entradaQuantidade = document.getElementById('entrada-quantidade');
+const updateNome = document.getElementById('update-nome');
+const updateTipo = document.getElementById('update-tipo');
+const updateQuantidade = document.getElementById('update-quantidade');
+const updateValor = document.getElementById('update-valor');
+const updateQtMinima = document.getElementById('update-qtmin');
+
+//Filtro/busca
+const btnBuscar = document.getElementById('btn-buscar');
+const filtroNome = document.getElementById('filtro-nome');
+const filtroTipo = document.getElementById('filtro-tipo');
+const corpoTabela = document.getElementById('corpo-tabela');
+const btnLimparFiltro = document.getElementById('btn-limpar-filtro');
+
+//Campos Númericos (Validações de digitação)
+const camposNumericos = document.querySelectorAll('input[type="number"]');
+const campoValor = document.querySelector('input[name="valor"]');
+
+// ==========================================
+// Listeners
+// ==========================================
 btnAdicionar.addEventListener('click', function(){
     formInsert.classList.toggle('visivel');
     overlay.classList.toggle('visivel');
 });
 
-btnRemover.addEventListener('click', function(){
-    formRemover.classList.toggle('visivel');
-    overlay.classList.toggle('visivel');
-});
-
 btnCancelarInsert.addEventListener('click', function(){
     formInsert.classList.remove('visivel');
-    overlay.classList.remove('visivel');
+     overlay.classList.remove('visivel');
 });
 
 btnCancelarRemover.addEventListener('click', function(){
@@ -32,25 +62,35 @@ btnCancelarUpdate.addEventListener('click', function(){
     overlay.classList.remove('visivel');
 });
 
-document.addEventListener('click', function(event) {
-    const cliqueForaDoFormInsert = !formInsert.contains(event.target);
-    const cliqueForaDoFormRemover = !formRemover.contains(event.target);
-    const cliqueForaDoFormUpdate= !formUpdate.contains(event.target);
-    const cliqueForaDoBotaoAdicionar = !btnAdicionar.contains(event.target);
-    const cliqueForaDoBotaoRemover = !btnRemover.contains(event.target);
-    const cliqueForaDoBotaoUpdate = !event.target.closest('.btn-editar');
+btnCancelarIncrement.addEventListener('click', function(){
+    formEntrada.classList.remove('visivel');
+    overlay.classList.remove('visivel');
+})
 
-    if(cliqueForaDoFormInsert && cliqueForaDoBotaoAdicionar && cliqueForaDoFormRemover && cliqueForaDoBotaoRemover && cliqueForaDoFormUpdate && cliqueForaDoBotaoUpdate){
+// ==========================================
+// Fechar Forms
+// ==========================================
+document.addEventListener('click', function(event) {
+
+    const cliqueForaDoFormInsert = !formInsert.contains(event.target);
+    const cliqueForaDoFormUpdate= !formUpdate.contains(event.target);
+    const cliqueForaDoFormEntrada = !formEntrada.contains(event.target);
+    const cliqueForaDoFormRemover = !formRemover.contains(event.target);
+    const cliqueForaDoBotaoAdicionar = !btnAdicionar.contains(event.target);
+    const cliqueForaDoBotaoUpdate = !event.target.closest('.btn-abrir-editar, .btn-abrir-entrada, .btn-abrir-saida');
+
+    if(cliqueForaDoFormInsert && cliqueForaDoBotaoAdicionar && cliqueForaDoFormUpdate && cliqueForaDoBotaoUpdate && cliqueForaDoFormEntrada && cliqueForaDoFormRemover){
         formInsert.classList.remove('visivel');
         formRemover.classList.remove('visivel');
         formUpdate.classList.remove('visivel');
+        formEntrada.classList.remove('visivel');
         overlay.classList.remove('visivel');
     }
 })
 
-const camposNumericos = document.querySelectorAll('input[type="number"]');
-const campoValor = document.querySelector('input[name="valor"');
-
+// ==========================================
+// Validação dos campos númericos
+// ==========================================
 camposNumericos.forEach(function(campo){
     campo.addEventListener('keypress', function(event){
         const tecla = event.key;
@@ -69,13 +109,10 @@ campoValor.addEventListener('input', function(){
     }
 });
 
-//Filtra a lista ~~~~~~~~~~~~~~~
+// ==========================================
+// Filtro da lista
+// ==========================================
 
-const btnBuscar = document.getElementById('btn-buscar');
-const filtroNome = document.getElementById('filtro-nome');
-const filtroTipo = document.getElementById('filtro-tipo');
-const corpoTabela = document.getElementById('corpo-tabela');
-const btnLimparFiltro = document.getElementById('btn-limpar-filtro');
 
 btnBuscar.addEventListener('click', function(){
     const nome = filtroNome.value;
@@ -99,14 +136,14 @@ btnBuscar.addEventListener('click', function(){
                     <div class="item"><p>Valor Unitário</p>${parseFloat(item.vl_unitario).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
                     <div class="item"><p>Quantidade Mínima</p>${item.qt_minima}</div>
                     <div class="item">
-                        <button type="button" class="btn-icon btn-editar"
+                        <button type="button" class="btn-icon btn-menu-item"
                             data-codigo="${item.cd_codigo}"
                             data-nome="${item.nm_item}"
                             data-tipo="${item.ds_tipo}"
                             data-quantidade="${item.qt_itens}"
                             data-valor="${item.vl_unitario}"
                             data-qtmin="${item.qt_minima}">
-                            <img src="icons/pencil.svg" alt="Editar">
+                            <img src="icons/three-dots.svg" alt="Opções">
                         </button>
                     </div>    
                 </td>
@@ -125,31 +162,69 @@ btnLimparFiltro.addEventListener('click', function() {
     btnBuscar.click();
 });
 
-
-// Update ~~~~~~~~~~~~~~~~~
-
-const formUpdate = document.getElementById('form-update');
-
-const UpdateCodigo = document.getElementById('update-codigo');
-const updateNome = document.getElementById('update-nome');
-const updateTipo = document.getElementById('update-tipo');
-const updateQuantidade = document.getElementById('update-quantidade');
-const updateValor = document.getElementById('update-valor');
-const updateQtMinima = document.getElementById('update-qtmin');
-
+// ==========================================
+// Delegação de eventos na tabela
+// ==========================================
 corpoTabela.addEventListener('click', function(event) {
-    const botao = event.target.closest('.btn-editar');
-    if (!botao) return;
+    
+    //menu dropdown de itens    
+    const dropdownAberto = document.querySelector('.dropdown-menu.aberto');
+    if(dropdownAberto){
+        const clicouNoMenu = event.target.closest('.dropdown-menu');
+        const clicouNoBotao = event.target.closest('.btn-menu-item');
 
-    UpdateCodigo.value = botao.dataset.codigo;
-    updateNome.value = botao.dataset.nome;
-    updateTipo.value = botao.dataset.tipo;
-    updateQuantidade.value = botao.dataset.quantidade;
-    updateValor.value = botao.dataset.valor;
-    updateQtMinima.value = botao.dataset.qtmin;
+        if(!clicouNoMenu && !clicouNoBotao){
+            dropdownAberto.classList.remove('aberto');
+        }
+    }
+    
+    const btnMenu = event.target.closest('.btn-menu-item');
+    if(btnMenu){
+        const menu = btnMenu.nextElementSibling;
+        document.querySelectorAll('.dropdown-menu.aberto').forEach(m => {
+            if (m !== menu) m.classList.remove('aberto');
+        });
+        menu.classList.toggle('aberto');
+        return;
+    }
 
-    formUpdate.classList.toggle('visivel');
-    overlay.classList.toggle('visivel');
+     
+    const btnEditar = event.target.closest('.btn-abrir-editar');
+    if(btnEditar) {
+        const botaoOrigem  = btnEditar.closest('.item').querySelector('.btn-menu-item');
+        updateCodigo.value = botaoOrigem.dataset.codigo;
+        updateNome.value = botaoOrigem.dataset.nome;
+        updateTipo.value = botaoOrigem.dataset.tipo;
+        updateQuantidade.value = botaoOrigem.dataset.quantidade;
+        updateValor.value = botaoOrigem.dataset.valor;
+        updateQtMinima.value = botaoOrigem.dataset.qtmin;
+        formUpdate.classList.toggle('visivel');
+        overlay.classList.toggle('visivel');
+        btnEditar.closest('.dropdown-menu').classList.remove('aberto');
+        return;
+
+    }
+
+    const btnEntrada  = event.target.closest('.btn-abrir-entrada');
+    if(btnEntrada){
+        const botaoOrigem = btnEntrada.closest('.item').querySelector('.btn-menu-item');
+        entradaCodigo.value = botaoOrigem.dataset.codigo;
+        formEntrada.classList.toggle('visivel');
+        overlay.classList.toggle('visivel');
+        btnEntrada.closest('.dropdown-menu').classList.remove('aberto');
+        return;
+    }
+
+    const btnSaida = event.target.closest('.btn-abrir-saida');
+    if(btnSaida) {
+        const botaoOrigem = btnSaida.closest('.item').querySelector('.btn-menu-item');
+        saidaCodigo.value = botaoOrigem.dataset.codigo;
+        formRemover.classList.toggle('visivel');
+        overlay.classList.toggle('visivel');
+        btnSaida.closest('.dropdown-menu').classList.remove('aberto');
+        return;
+    }
+
 });
 
-// Excluir ~~~~~~~~~~~~~~~~~ inativo por hora
+
