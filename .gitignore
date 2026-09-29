@@ -7,3 +7,4 @@ php-8.2.33-nts-Win32-vs16-x64/
 # Arquivos temporários do sistema
 Thumbs.db
 .DS_Store
+deleteItem.php

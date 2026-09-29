@@ -21,6 +21,12 @@ body{
     background-repeat: no-repeat; 
 }
 
+#painelUser
+{
+     background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url("../img/LogoSHB.jpg");
+}
+
 main{
     flex:1;
 }
@@ -125,13 +131,20 @@ td{
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 1px #000;
-    border: solid;
     color:#85898d;
 } 
 
 td p{
     color:#000;
     margin: 0;
+}
+
+th{
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+    align-items: center;
+    color:#fff;
 }
 
 .item{
@@ -165,7 +178,7 @@ td p{
     display: none;
     position: absolute;
     background-color: #fff;
-    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.3), 0px 0px 10px 1px rgba(0,0,0,0.3);
     border-radius: 8px;
     z-index: 50;
     flex-direction: column;
@@ -195,7 +208,7 @@ td p{
     margin: 20px;
     padding: 2%;
     border-radius:20px;
-    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.3), 0px 0px 10px 1px rgba(0,0,0,0.3);
     background-color: #fff;
 }
 
@@ -345,6 +358,32 @@ select{
     display: block;
 }
 
+/* ================= Form DeleteItem =================== */
+
+#form-delete{
+    display:none;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.3);
+    z-index:100;
+    background-color: #fff;
+    width: 30%;
+    padding: 2%;
+    border-radius: 20px;
+    text-align: center;
+    flex-direction: column;
+}
+
+#form-delete.visivel{
+    display: flex;
+}
+
+#form-delete h2{
+    margin:0;
+    color:#000;
+}
 
 /* ================= Form Remove =================== */
 

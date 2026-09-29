@@ -7,14 +7,17 @@ const formUpdate = document.getElementById('form-update');
 const formInsert = document.getElementById('form-insert');
 const formRemover = document.getElementById('form-remove');
 const formEntrada = document.getElementById('form-increment');
+const formExcluir = document.getElementById('form-delete');
 const overlay = document.getElementById('overlay');
 
 // Botões de abrir/cancelar
 const btnAdicionar = document.getElementById('btn-adicionar');
+const btnExcluir = document.getElementById('btn-excluir');
 const btnCancelarInsert = document.getElementById('btn-cancelar-inserir');
 const btnCancelarRemover = document.getElementById('btn-cancelar-remover');
 const btnCancelarIncrement = document.getElementById('btn-cancelar-increment');
 const btnCancelarUpdate = document.getElementById('btn-cancelar-update');
+const btnCancelarExcluir = document.getElementById('btn-cancelar-excluir');
 
 // Campos de formulário de edição(update)
 const updateCodigo = document.getElementById('update-codigo');
@@ -48,9 +51,19 @@ if(btnAdicionar){
         overlay.classList.toggle('visivel');
     });
 }
+if(btnExcluir){
+    btnExcluir.addEventListener('click', function(){
+        formExcluir.classList.toggle('visivel');
+        overlay.classList.toggle('visivel');
+    });
+}
 
 btnCancelarInsert.addEventListener('click', function(){
     formInsert.classList.remove('visivel');
+     overlay.classList.remove('visivel');
+});
+btnCancelarExcluir.addEventListener('click', function(){
+    formExcluir.classList.remove('visivel');
      overlay.classList.remove('visivel');
 });
 
@@ -75,18 +88,21 @@ btnCancelarIncrement.addEventListener('click', function(){
 document.addEventListener('click', function(event) {
 
     const cliqueForaDoFormInsert = !formInsert.contains(event.target);
+    const cliqueForaDoFormExcluir = !formExcluir.contains(event.target);
     const cliqueForaDoFormUpdate= !formUpdate.contains(event.target);
     const cliqueForaDoFormEntrada = !formEntrada.contains(event.target);
     const cliqueForaDoFormRemover = !formRemover.contains(event.target);
     const cliqueForaDoBotaoAdicionar = !btnAdicionar.contains(event.target);
+    const cliqueForaDoBotaoExcluir = !btnExcluir.contains(event.target);
     const cliqueForaDoBotaoUpdate = !event.target.closest('.btn-abrir-editar, .btn-abrir-entrada, .btn-abrir-saida');
 
-    if(cliqueForaDoFormInsert && cliqueForaDoBotaoAdicionar && cliqueForaDoFormUpdate && cliqueForaDoBotaoUpdate && cliqueForaDoFormEntrada && cliqueForaDoFormRemover){
+    if(cliqueForaDoFormInsert && cliqueForaDoFormExcluir && cliqueForaDoBotaoExcluir && cliqueForaDoBotaoAdicionar && cliqueForaDoFormUpdate && cliqueForaDoBotaoUpdate && cliqueForaDoFormEntrada && cliqueForaDoFormRemover){
         formInsert.classList.remove('visivel');
         formRemover.classList.remove('visivel');
         formUpdate.classList.remove('visivel');
         formEntrada.classList.remove('visivel');
-        overlay.classList.remove('visivel');
+        formExcluir.classList.remove('visivel');
+        overlay.classList.remove('visivel'); 
     }
 })
 
