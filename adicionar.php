@@ -1,11 +1,10 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['usuario_id'])) {
-    die('Acesso negado. Faça login primeiro.');
-}
-
 include('conexao.php');
+include('auth.php');
+
+exigirGestao();
+
 $cod = $_POST['codigo'];
 $qdtAdc = $_POST['quantidade-adc'];
 

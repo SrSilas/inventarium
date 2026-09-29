@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['usuario_id'])) {
-    die('Acesso negado. Faça login primeiro.');
-}
-
 include('conexao.php');
+include('auth.php');
+
+exigirLogin();
+
 $cod = $_POST['codigo'];
 $qdtRetirar = $_POST['quantidade-ret'];
 

@@ -17,6 +17,7 @@ try {
     if ($usuario && password_verify($senha, $usuario['ds_senha'])) {
         $_SESSION['usuario_id'] = $usuario['cd_usuario'];
         $_SESSION['usuario_nome'] = $usuario['nm_usuario'];
+        $_SESSION['usuario_tipo'] = $usuario['tp_usuario'];
 
         header('Location: index.php');
         exit;
@@ -29,7 +30,7 @@ try {
 
 } catch (PDOException $e) {
     echo "<script>
-            alert('Erro ao fazer login: " . addslashes($e->getMessage()) . "';
+            alert('Erro ao fazer login: " . addslashes($e->getMessage()) . "');
             window.location.href='login.html';
            </script>";
 }

@@ -3,7 +3,7 @@
 }
 
 html, body{
-    height: 100%;
+    min-height: 100%;
     margin:0;
 }
 
@@ -93,10 +93,10 @@ h2{
     width:40%;
     padding: 2%;
     margin:0;
-    border-radius: 10px;
-}
-table{
-    width: 80%;
+    border-radius: 10px;    
+}   
+table{  
+    width: 80%; 
     text-align: center;
     justify-content: center;
     display: flex;

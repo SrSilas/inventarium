@@ -42,10 +42,12 @@ const campoValor = document.querySelector('input[name="valor"]');
 // ==========================================
 // Listeners
 // ==========================================
-btnAdicionar.addEventListener('click', function(){
-    formInsert.classList.toggle('visivel');
-    overlay.classList.toggle('visivel');
-});
+if(btnAdicionar){
+    btnAdicionar.addEventListener('click', function(){
+        formInsert.classList.toggle('visivel');
+        overlay.classList.toggle('visivel');
+    });
+}
 
 btnCancelarInsert.addEventListener('click', function(){
     formInsert.classList.remove('visivel');

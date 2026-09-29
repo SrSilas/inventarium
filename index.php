@@ -5,12 +5,10 @@ header('Cache-Control: no-cache, no-store, must-revalidate');
 header('Pragma: no-cache');
 header('Expires: 0');
 
-if (!isset($_SESSION['usuario_id'])) {
-    header('Location: login.html');
-    exit;
-}
-
 include('conexao.php');
+include('auth.php');
+
+exigirLogin();
 
 $query = "SELECT * FROM material_manutencao";
 
@@ -141,7 +139,9 @@ $conn = null;
         </div>
         <h2>Materiais em estoque</h2>
         <div id="div-btn-funcao">
-            <button class="botao" id="btn-adicionar">Cadastrar</button>
+            <?php if(ehGestao()): ?>
+                <button class="botao" id="btn-adicionar">Cadastrar</button>
+            <?php endif; ?>    
         </div>
         <table>
             <tbody id="corpo-tabela">
@@ -175,7 +175,9 @@ $conn = null;
                                 <img src="icons/three-dots.svg" alt="Opções">
                             </button>
                             <div class="dropdown-menu">
-                                <button type="button" class="dropdown-opcao btn-abrir-editar">Editar</button>
+                                <?php if(ehGestao()): ?>
+                                    <button type="button" class="dropdown-opcao btn-abrir-editar">Editar</button>
+                                <?php endif; ?>    
                                 <button type="button" class="dropdown-opcao btn-abrir-entrada">Adicionar</button>
                                 <button type="button" class="dropdown-opcao btn-abrir-saida">Retirar</button>
                             </div>
