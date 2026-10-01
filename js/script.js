@@ -37,6 +37,9 @@ const filtroNome = document.getElementById('filtro-nome');
 const filtroTipo = document.getElementById('filtro-tipo');
 const corpoTabela = document.getElementById('corpo-tabela');
 const btnLimparFiltro = document.getElementById('btn-limpar-filtro');
+const btnBuscarUser = document.getElementById('btn-buscar-user');
+const btnCadastrarUser = document.getElementById('btn-cadastrar-user');
+const corpoTabelaUser = document.getElementById('corpo-tabela-user');
 
 //Campos Númericos (Validações de digitação)
 const camposNumericos = document.querySelectorAll('input[type="number"]');
@@ -49,7 +52,7 @@ if(btnAdicionar){
     btnAdicionar.addEventListener('click', function(){
         formInsert.classList.toggle('visivel');
         overlay.classList.toggle('visivel');
-    });
+    });    
 }
 if(btnExcluir){
     btnExcluir.addEventListener('click', function(){
@@ -59,9 +62,10 @@ if(btnExcluir){
 }
 
 btnCancelarInsert.addEventListener('click', function(){
-    formInsert.classList.remove('visivel');
-     overlay.classList.remove('visivel');
+        formInsert.classList.remove('visivel');
+         overlay.classList.remove('visivel');
 });
+
 btnCancelarExcluir.addEventListener('click', function(){
     formExcluir.classList.remove('visivel');
      overlay.classList.remove('visivel');
@@ -80,7 +84,7 @@ btnCancelarUpdate.addEventListener('click', function(){
 btnCancelarIncrement.addEventListener('click', function(){
     formEntrada.classList.remove('visivel');
     overlay.classList.remove('visivel');
-})
+});
 
 // ==========================================
 // Fechar Forms
@@ -179,6 +183,7 @@ btnLimparFiltro.addEventListener('click', function() {
     filtroTipo.value = '';
     btnBuscar.click();
 });
+
 
 // ==========================================
 // Delegação de eventos na tabela

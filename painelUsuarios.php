@@ -23,7 +23,7 @@ $conn = null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="img/LogoSHB.jpg">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js" defer></script>
+    <script src="js/scriptUsers.js" defer></script>
     <title>Gestão de Usuários</title>
 </head>
 
@@ -33,35 +33,54 @@ $conn = null;
         <a href="logout.php" class="botao" id="btn-logout">Sair</a>
     </header>
     <main>
-        <div id="lista">
-            <div id="div-filtro">
-                <input type="text" id="filtro-nome" placeholder="Buscar por nome">
-                <div id="div-btn-filtro">
+        <div id="overlay"></div>
+        <!-- Form cadastro -->
+        <div id="form-cadastro">
+            <h2>Novo Usuário</h2>
+            <form method="POST" action="cadastro.php">
+                <p>Nome do usuário</p>
+                <input type="text" placeholder="Colaborador" name="codigo" id="entrada-codigo">
+                <p>Login</p>
+                <input type="number" placeholder="Login do Usuário" name="quantidade-adc" id="entrada-quantidade">
+                <div id="div-btn-form">
+                    <input type="submit" value="Criar" class="botao" id="btn-increment">
+                    <button type="button" class="botao" id="btn-cancelar-user">Cancelar</button>
+                </div>
+            </form>
+        </div>
+        <div id="lista-user">
+            <h2>Gestão de Usuários</h2>
+            <div id="div-filtro-user">
+                <input type="text" id="filtro-nome-user" placeholder="Buscar por nome">
+                <div id="div-btn-filtro-user">
                     <button type="button" id="btn-buscar" class="botao">
                         <span class="texto-botao">Buscar</span>
                         <img src="icons/search.svg" alt="Buscar" class="icone-botao">
                     </button>
+                    <button type="button" id="btn-cadastrar-user" class="botao">
+                        <span class="texto-botao">Cadastrar</span>
+                        <img src="icons/search.svg" alt="Buscar" class="icone-botao">
+                    </button>
                 </div>
             </div>
-            <h2>Usuários</h2>
             <table>
-                <tbody>
+                <tbody id="corpo-tabela-user">
                     <tr>
                         <th>
-                            <div class="item">
+                            <div class="item-user">
                                 <p>Código</p>
                             </div>
-                            <div class="item">
+                            <div class="item-user">
                                 <p>Nome</p>
                             </div>
-                            <div class="item">
+                            <div class="item-user">
                                 <p>Login</p>
                             </div>
                         </th>
                     </tr>
                     <?php foreach ($users as $user): ?>
                         <tr>
-                            <td>
+                            <td id="td-user">
                                 <div class="item">
                                     <span title="<?= $user['cd_usuario'] ?>"><?= $user['cd_usuario'] ?></span>
                                 </div>

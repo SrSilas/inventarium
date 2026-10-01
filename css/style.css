@@ -23,7 +23,7 @@ body{
 
 #painelUser
 {
-     background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
     url("../img/LogoSHB.jpg");
 }
 
@@ -199,6 +199,66 @@ th{
 
 .dropdown-opcao:hover{
     background-color: #f0f0f0;
+    
+}
+
+/* ================= Lista Usuarios =================== */
+
+#lista-user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-user{
+    width: 80%;
+    padding: 1%;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#td-user{
+padding: 1%;
+}
+
+#div-filtro-user{
+    display: flex;
+    gap:10px;
+    width:69%;
+    margin: 20px;
+    padding: 1%;
+    border-radius:20px;
+}
+
+#filtro-nome-user{
+    width:85%;
+    padding: 2%;
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.3), 0px 0px 10px 1px rgba(0,0,0,0.3);
+    background-color: transparent;
+    color: #fff;
+}
+
+#filtro-nome-user::placeholder{
+    color: #fff;
+}
+
+#div-btn-filtro-user{
+    margin:0;
+    margin-right: 0%;
+    width:25%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+#div-btn-filtro-user .botao{
+    width:50%;
+    padding: 2%;
+    margin:0;
+    border-radius: 10px;
 }
 /* ================= Filtro =================== */
 #div-filtro{
@@ -306,13 +366,15 @@ form p{
 #btn-cancelar-inserir,
 #btn-cancelar-remover,
 #btn-cancelar-update,
-#btn-cancelar-increment{
+#btn-cancelar-increment,
+#btn-cancelar-user{
     background-color: #aa3434;
 }
 #btn-cancelar-inserir:hover,
 #btn-cancelar-remover:hover,
 #btn-cancelar-update:hover,
-#btn-cancelar-increment:hover{
+#btn-cancelar-increment:hover,
+#btn-cancelar-user:hover{
     background-color: #641919;
 }
 
@@ -500,6 +562,40 @@ select{
     margin-bottom: 20px;
 }
 
+/* ================= Form Cadastro =================== */
+
+#form-cadastro{
+    display:none;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.3);
+    z-index:100;
+    background-color: #fff;
+    width: 30%;
+    padding: 2%;
+    border-radius: 20px;
+    text-align: center;
+    flex-direction: column;
+}
+
+#form-cadastro.visivel{
+    display: flex;
+}
+
+#form-cadastro h2{
+    margin:0;
+    color:#000;
+}
+
+#form-cadastro #div-btn-form{
+    align-self: center;
+    width:70%;
+    padding: 3%;
+    margin:0;
+    border-radius: 10px;
+}
 /*----------------------------------- Footer --------------------------------------*/
 
 footer{
