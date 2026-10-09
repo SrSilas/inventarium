@@ -5,7 +5,7 @@ include('conexao.php');
 
 exigirGestao();
 
-$query = "SELECT cd_usuario, nm_usuario, ds_login FROM users";
+$query = "SELECT cd_usuario, nm_usuario, ds_login, tp_usuario, ds_email FROM users";
 try {
     $stmt = $conn->prepare($query);
     $stmt->execute();
@@ -37,11 +37,19 @@ $conn = null;
         <!-- Form cadastro -->
         <div id="form-cadastro">
             <h2>Novo Usuário</h2>
-            <form method="POST" action="cadastro.php">
+            <form method="POST" action="cadastroUser.php">
                 <p>Nome do usuário</p>
-                <input type="text" placeholder="Colaborador" name="codigo" id="entrada-codigo">
+                <input type="text" placeholder="Colaborador" name="nome-usuario" id="entrada-user" required>
                 <p>Login</p>
-                <input type="number" placeholder="Login do Usuário" name="quantidade-adc" id="entrada-quantidade">
+                <input type="text" placeholder="Login do Usuário" name="login-usuario" id="login-user" required>
+                <p>Email</p>
+                <input type="email" placeholder="Email do Usuário" name="email-usuario" id="email-user" required>
+                <p>Tipo de Usuário</p>
+                <select name="tipo-usuario" required>
+                    <option value="">Selecione o tipo</option>
+                    <option value="gestao">Gestão</option>
+                    <option value="comum">Comum</option>
+                </select>
                 <div id="div-btn-form">
                     <input type="submit" value="Criar" class="botao" id="btn-increment">
                     <button type="button" class="botao" id="btn-cancelar-user">Cancelar</button>
@@ -52,8 +60,13 @@ $conn = null;
             <h2>Gestão de Usuários</h2>
             <div id="div-filtro-user">
                 <input type="text" id="filtro-nome-user" placeholder="Buscar por nome">
+                <div class="campo-filtro-user">
+                    <button type="button" id="limparFiltro" class="btn-limpar">
+                        X
+                    </button>
+                </div>
                 <div id="div-btn-filtro-user">
-                    <button type="button" id="btn-buscar" class="botao">
+                    <button type="button" id="btn-buscar-user" class="botao">
                         <span class="texto-botao">Buscar</span>
                         <img src="icons/search.svg" alt="Buscar" class="icone-botao">
                     </button>
@@ -76,6 +89,15 @@ $conn = null;
                             <div class="item-user">
                                 <p>Login</p>
                             </div>
+                            <div class="item-user">
+                                <p>Tipo de Usuário</p>
+                            </div>
+                            <div class="item-user">
+                                <p>Email</p>
+                            </div>
+                            <div class="item-user">
+                                <p></p>
+                            </div>
                         </th>
                     </tr>
                     <?php foreach ($users as $user): ?>
@@ -90,9 +112,28 @@ $conn = null;
                                 <div class="item">
                                     <span title="<?= $user['ds_login'] ?>"><?= $user['ds_login'] ?></span>
                                 </div>
+                                <div class="item">
+                                    <span title="<?= $user['tp_usuario'] ?>"><?= $user['tp_usuario'] ?></span>
+                                </div>
+                                <div class="item">
+                                    <span title="<?= $user['ds_email'] ?>"><?= $user['ds_email'] ?></span>
+                                </div>
+                                <div class="item-user">
+                                    <button type="button" class="btn-icon btn-menu-item"
+                                        data-codigo="<?= htmlspecialchars($item['cd_usuario']) ?>"
+                                        data-nome="<?= htmlspecialchars($item['nm_usuario']) ?>"
+                                        data-login="<?= htmlspecialchars($item['ds_login']) ?>"
+                                        data-tipo="<?= htmlspecialchars($item['tp_ususario']) ?>"
+                                        data-email="<?= htmlspecialchars($item['ds_email']) ?>">
+                                        <img src="icons/three-dots.svg" alt="Opções">
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button type="button" class="dropdown-opcao btn-editar-user">Editar</button>
+                                        <button type="button" class="dropdown-opcao btn-reset-senha">Reset Senha</button>
+                                    </div>
+                                </div>
                             </td>
-                        </tr>
-                    <?php endforeach ?>
+                        </tr> <?php endforeach ?>
                 </tbody>
             </table>
     </main>

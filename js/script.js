@@ -205,7 +205,7 @@ corpoTabela.addEventListener('click', function(event) {
     if(btnMenu){
         const menu = btnMenu.nextElementSibling;
         document.querySelectorAll('.dropdown-menu.aberto').forEach(m => {
-            if (m !== menu) m.classList.remove('aberto');
+            if (m !== menu) m.classList.remove('aberto')
         });
         menu.classList.toggle('aberto');
         return;
