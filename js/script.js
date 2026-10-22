@@ -7,7 +7,6 @@ const formUpdate = document.getElementById('form-update');
 const formInsert = document.getElementById('form-insert');
 const formRemover = document.getElementById('form-remove');
 const formEntrada = document.getElementById('form-increment');
-const formExcluir = document.getElementById('form-delete');
 const overlay = document.getElementById('overlay');
 
 // Botões de abrir/cancelar
@@ -66,10 +65,6 @@ btnCancelarInsert.addEventListener('click', function(){
          overlay.classList.remove('visivel');
 });
 
-btnCancelarExcluir.addEventListener('click', function(){
-    formExcluir.classList.remove('visivel');
-     overlay.classList.remove('visivel');
-});
 
 btnCancelarRemover.addEventListener('click', function(){
     formRemover.classList.remove('visivel');
@@ -92,20 +87,17 @@ btnCancelarIncrement.addEventListener('click', function(){
 document.addEventListener('click', function(event) {
 
     const cliqueForaDoFormInsert = !formInsert.contains(event.target);
-    const cliqueForaDoFormExcluir = !formExcluir.contains(event.target);
     const cliqueForaDoFormUpdate= !formUpdate.contains(event.target);
     const cliqueForaDoFormEntrada = !formEntrada.contains(event.target);
     const cliqueForaDoFormRemover = !formRemover.contains(event.target);
     const cliqueForaDoBotaoAdicionar = !btnAdicionar.contains(event.target);
-    const cliqueForaDoBotaoExcluir = !btnExcluir.contains(event.target);
     const cliqueForaDoBotaoUpdate = !event.target.closest('.btn-abrir-editar, .btn-abrir-entrada, .btn-abrir-saida');
 
-    if(cliqueForaDoFormInsert && cliqueForaDoFormExcluir && cliqueForaDoBotaoExcluir && cliqueForaDoBotaoAdicionar && cliqueForaDoFormUpdate && cliqueForaDoBotaoUpdate && cliqueForaDoFormEntrada && cliqueForaDoFormRemover){
+    if(cliqueForaDoFormInsert && cliqueForaDoBotaoAdicionar && cliqueForaDoFormUpdate && cliqueForaDoBotaoUpdate && cliqueForaDoFormEntrada && cliqueForaDoFormRemover){
         formInsert.classList.remove('visivel');
         formRemover.classList.remove('visivel');
         formUpdate.classList.remove('visivel');
         formEntrada.classList.remove('visivel');
-        formExcluir.classList.remove('visivel');
         overlay.classList.remove('visivel'); 
     }
 })
@@ -158,15 +150,19 @@ btnBuscar.addEventListener('click', function(){
                     <div class="item"><p>Valor Unitário</p>${parseFloat(item.vl_unitario).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
                     <div class="item"><p>Quantidade Mínima</p>${item.qt_minima}</div>
                     <div class="item">
-                        <button type="button" class="btn-icon btn-menu-item"
-                            data-codigo="${item.cd_codigo}"
-                            data-nome="${item.nm_item}"
-                            data-tipo="${item.ds_tipo}"
-                            data-quantidade="${item.qt_itens}"
-                            data-valor="${item.vl_unitario}"
-                            data-qtmin="${item.qt_minima}">
-                            <img src="icons/three-dots.svg" alt="Opções">
-                        </button>
+                         <div class="item">
+                            <button type="button" class="btn-icon btn-menu-item" data-codigo="<?= $item['cd_codigo'] ?>"
+                                data-nome="<?= $item['nm_item'] ?>" data-tipo="<?= $item['ds_tipo'] ?>"
+                                data-quantidade="<?= $item['qt_itens'] ?>" data-valor="<?= $item['vl_unitario']?>" data-qtmin="<?= $item['qt_minima']?>">
+                                <img src="icons/three-dots.svg" alt="Opções">
+                            </button>
+                         <div class="dropdown-menu">
+                                <?php if(ehGestao()): ?>
+                                    <button type="button" class="dropdown-opcao btn-abrir-editar">Editar</button>
+                                <?php endif; ?>    
+                                <button type="button" class="dropdown-opcao btn-abrir-entrada">Adicionar</button>
+                                <button type="button" class="dropdown-opcao btn-abrir-saida">Retirar</button>
+                        </div>
                     </div>    
                 </td>
             `;
@@ -189,7 +185,6 @@ btnLimparFiltro.addEventListener('click', function() {
 // Delegação de eventos na tabela
 // ==========================================
 corpoTabela.addEventListener('click', function(event) {
-    
     //menu dropdown de itens    
     const dropdownAberto = document.querySelector('.dropdown-menu.aberto');
     if(dropdownAberto){

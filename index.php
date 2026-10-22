@@ -64,7 +64,7 @@ $conn = null;
             </div>
         </form>
     </div>
-     <div id="form-delete">
+     <!-- <div id="form-delete">
         <h2>Saída de material</h2>
         <form method="POST" action="deleteItem.php">
             <p>Código do item</p>
@@ -74,7 +74,7 @@ $conn = null;
                 <button type="button" class="botao" id="btn-cancelar-excluir">Cancelar</button>
             </div>
         </form>
-    </div>
+    </div> -->
     <div id="overlay"></div>
     <div id="form-remove">
         <h2>Saída de material</h2>
@@ -152,7 +152,7 @@ $conn = null;
         <div id="div-btn-funcao">
             <?php if(ehGestao()): ?>
                 <button class="botao" id="btn-adicionar">Cadastrar</button>
-                <button class="botao" id="btn-excluir">Excluir</button>
+                <!-- <button class="botao" id="btn-excluir">Excluir</button> -->
             <?php endif; ?>    
         </div>
         <table>
