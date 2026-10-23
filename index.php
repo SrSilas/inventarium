@@ -20,6 +20,8 @@ try {
     die("Erro ao buscar dados: " . $e->getMessage());
 }
 $conn = null;
+
+require_once 'dropdown.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br   ">
@@ -36,8 +38,8 @@ $conn = null;
 <body>
     <header>
         <img src="img/logoInvent.png" alt="">
-        <a href="logout.php" class="botao" id="btn-logout">Sair</a>
-    </header>
+            <a href="logout.php" class="botao" id="btn-logout">Sair</a>
+        </header>
     <main>
     <!------------------ Forms -------------------->
     <div id="form-insert">
@@ -155,6 +157,13 @@ $conn = null;
                 <!-- <button class="botao" id="btn-excluir">Excluir</button> -->
             <?php endif; ?>    
         </div>
+        <?php
+            //opções do dropdown
+            $opcoes = [];
+            if(ehGestao()) $opcoes[] = ['acao' => 'editar', 'rotulo' => 'Editar'];
+            $opcoes[] = ['acao' => 'entrada', 'rotulo' => 'Adicionar'];
+            $opcoes[] = ['acao' => 'saida', 'rotulo' => 'Retirar'];
+        ?>
         <table>
             <tbody id="corpo-tabela">
                 <?php foreach ($itens as $item): ?>
@@ -180,20 +189,17 @@ $conn = null;
                             <p>Valor Unitário</p>
                             <?= number_format($item['vl_unitario'], 2, ',', '.') ?>
                         </div>
-                        <div class="item">
-                            <button type="button" class="btn-icon btn-menu-item" data-codigo="<?= $item['cd_codigo'] ?>"
-                                data-nome="<?= $item['nm_item'] ?>" data-tipo="<?= $item['ds_tipo'] ?>"
-                                data-quantidade="<?= $item['qt_itens'] ?>" data-valor="<?= $item['vl_unitario']?>" data-qtmin="<?= $item['qt_minima']?>">
-                                <img src="icons/three-dots.svg" alt="Opções">
-                            </button>
-                            <div class="dropdown-menu">
-                                <?php if(ehGestao()): ?>
-                                    <button type="button" class="dropdown-opcao btn-abrir-editar">Editar</button>
-                                <?php endif; ?>    
-                                <button type="button" class="dropdown-opcao btn-abrir-entrada">Adicionar</button>
-                                <button type="button" class="dropdown-opcao btn-abrir-saida">Retirar</button>
-                            </div>
-                            </div>
+                        
+                        <?php
+                            renderDropdown($opcoes, [
+                                'codigo'     => $item['cd_codigo'],
+                                'nome'       => $item['nm_item'],
+                                'tipo'       => $item['ds_tipo'],
+                                'quantidade' => $item['qt_itens'],
+                                'valor'      => $item['vl_unitario'],
+                                'qtmin'      => $item['qt_minima'],
+                            ]);
+                        ?>
                         </td>
                     </tr>
                 <?php endforeach ?>
