@@ -5,6 +5,8 @@ function exigirLogin()
         header('Location: login.html');
         exit;
     }
+
+    $_SESSION['usuario_nome'];
 }
 
 function exigirGestao()

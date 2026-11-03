@@ -273,4 +273,8 @@ registrarAcoes({
         formRemover.classList.toggle('visivel');
         overlay.classList.toggle('visivel');
     },
+    painelUsers(){window.location.href = 'painelUsuarios.php';},
+    resetPass(d){},
+    logoff(){window.location.href = 'logout.php';},
 });
+

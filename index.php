@@ -38,7 +38,20 @@ require_once 'dropdown.php';
 <body>
     <header>
         <img src="img/logoInvent.png" alt="">
-            <a href="logout.php" class="botao" id="btn-logout">Sair</a>
+        <div id="user-dropdown">
+            <?php
+            //opções do dropdown usuario
+            $opcoesUser = [];
+            if(ehGestao()) $opcoesUser[] = ['acao' => 'painelUsers', 'rotulo' => 'Gestão de usuários'];
+            $opcoesUser[] = ['acao' => 'resetPass', 'rotulo' => 'Redefinir senha'];
+            $opcoesUser[] = ['acao' => 'logoff', 'rotulo' => 'Sair'];
+            ?>
+            <?php
+                renderDropdown($opcoesUser, [
+                    'codigo' => $_SESSION['usuario_id'],
+                ], 'item', $_SESSION['usuario_nome']);
+            ?>
+        </div>    
         </header>
     <main>
     <!------------------ Forms -------------------->
