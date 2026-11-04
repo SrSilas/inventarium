@@ -63,6 +63,14 @@ header a{
     right: 16px;          /* ...e fica colado no canto direito */
     display: flex;
     align-items: center;  /* ...centralizando o ícone na vertical */
+    width: 90px;
+    height: 90px;
+}
+
+#user-dropdown .btn-icon img{
+    width:56px;
+    height:56px;
+    border-radius:100%;
 }
 
 #btn-logout{

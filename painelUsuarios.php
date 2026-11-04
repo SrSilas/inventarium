@@ -14,6 +14,8 @@ try {
     die("Erro ao busca dados: " . $e->getMessage());
 }
 $conn = null;
+
+require_once 'dropdown.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -30,7 +32,22 @@ $conn = null;
 <body id="painelUser">
     <header>
         <img src="img/logoInvent.png" alt="">
-        <a href="logout.php" class="botao" id="btn-logout">Sair</a>
+       <div id="user-dropdown">
+            <?php
+            //opções do dropdown usuario
+            $opcoesUser = [];
+            $opcoesUser[] = ['acao' => 'inicio', 'rotulo' => 'Início'];
+            $opcoesUser[] = ['acao' => 'resetPass', 'rotulo' => 'Redefinir senha'];
+            $opcoesUser[] = ['acao' => 'logoff', 'rotulo' => 'Sair'];
+            ?>
+            <?php
+                renderDropdown($opcoesUser,
+                ['codigo' => $_SESSION['usuario_id']],
+                icone: 'img/user.jpg',
+                alt: 'Menu do usuário'
+                );
+            ?>
+        </div>    
     </header>
     <main>
         <div id="overlay"></div>

@@ -1,18 +1,13 @@
 <?php
-    function renderDropdown(array $opcoes, array $dados = [], string $classe = 'item', string $textoBotao = ''): void {
+    function renderDropdown(array $opcoes, array $dados = [], string $classe = 'item', string $icone='icons/three-dots.svg', string $alt= 'Opções'): void {
         $attrs = '';
         foreach ($dados as $chave => $valor){
             $attrs .= 'data-' . $chave . '="' . htmlspecialchars((string)$valor, ENT_QUOTES) . '"';
         }
-        $comTexto = $textoBotao !== '';
         ?>
-    <div class="item dropdown">
-        <button type="button" class="btn-dropdown <?= $comTexto ? 'btn-texto' : 'btn-icon' ?>" <?= $attrs ?>>
-            <?php if($comTexto): ?>
-                <?= htmlspecialchars($textoBotao)?> <span class="seta">▾</span>
-            <?php else: ?>
-                <img src="icons/three-dots.svg" alt="Opções">
-            <?php endif; ?>    
+    <div class="<?= htmlspecialchars($classe) ?> dropdown">
+        <button type="button" class="btn-dropdown btn-icon" <?= $attrs ?>>
+                <img src="<?= htmlspecialchars($icone) ?>" alt="<?= htmlspecialchars($alt) ?>">    
         </button>
         <div class="dropdown-menu">
             <?php foreach ($opcoes as $op): ?>

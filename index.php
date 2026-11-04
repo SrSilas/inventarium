@@ -47,9 +47,11 @@ require_once 'dropdown.php';
             $opcoesUser[] = ['acao' => 'logoff', 'rotulo' => 'Sair'];
             ?>
             <?php
-                renderDropdown($opcoesUser, [
-                    'codigo' => $_SESSION['usuario_id'],
-                ], 'item', $_SESSION['usuario_nome']);
+                renderDropdown($opcoesUser,
+                ['codigo' => $_SESSION['usuario_id']],
+                icone: 'img/user.jpg',
+                alt: 'Menu do usuário'
+                );
             ?>
         </div>    
         </header>
@@ -142,6 +144,7 @@ require_once 'dropdown.php';
             </div>
         </form>
     </div>
+
     <!---------------------------- Lista de materiais do banco --------------------------->
     <div id="lista">
         <div id="div-filtro">
