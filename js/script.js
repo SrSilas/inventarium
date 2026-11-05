@@ -7,6 +7,7 @@ const formUpdate = document.getElementById('form-update');
 const formInsert = document.getElementById('form-insert');
 const formRemover = document.getElementById('form-remove');
 const formEntrada = document.getElementById('form-increment');
+const formPassword = document.getElementById('form-password');
 const overlay = document.getElementById('overlay');
 
 // Botões de abrir/cancelar
@@ -17,6 +18,7 @@ const btnCancelarRemover = document.getElementById('btn-cancelar-remover');
 const btnCancelarIncrement = document.getElementById('btn-cancelar-increment');
 const btnCancelarUpdate = document.getElementById('btn-cancelar-update');
 const btnCancelarExcluir = document.getElementById('btn-cancelar-excluir');
+const btnCancelarChangePass = document.getElementById('btn-cancelar-changePass');
 
 // Campos de formulário de edição(update)
 const updateCodigo = document.getElementById('update-codigo');
@@ -81,9 +83,13 @@ btnCancelarIncrement.addEventListener('click', function(){
     overlay.classList.remove('visivel');
 });
 
+btnCancelarChangePass.addEventListener('click', function(){
+    formPassword.classList.remove('visivel');
+    overlay.classList.remove('visivel');
+});
 // ==========================================
 // Fechar Forms
-// ==========================================
+// =========================================='
 document.addEventListener('click', function(event) {
 
     const cliqueForaDoFormInsert = !formInsert.contains(event.target);
@@ -91,13 +97,15 @@ document.addEventListener('click', function(event) {
     const cliqueForaDoFormEntrada = !formEntrada.contains(event.target);
     const cliqueForaDoFormRemover = !formRemover.contains(event.target);
     const cliqueForaDoBotaoAdicionar = !btnAdicionar.contains(event.target);
+    const cliqueForaDoBotaoCancelarChangePass = !btnCancelarChangePass.contains(event.target);
     const cliqueForaDoBotaoUpdate = !event.target.closest('.btn-abrir-editar, .btn-abrir-entrada, .btn-abrir-saida');
 
-    if(cliqueForaDoFormInsert && cliqueForaDoBotaoAdicionar && cliqueForaDoFormUpdate && cliqueForaDoBotaoUpdate && cliqueForaDoFormEntrada && cliqueForaDoFormRemover){
+    if(cliqueForaDoFormInsert && cliqueForaDoBotaoAdicionar && cliqueForaDoFormUpdate && cliqueForaDoBotaoUpdate && cliqueForaDoFormEntrada && cliqueForaDoFormRemover && cliqueForaDoBotaoCancelarChangePass){
         formInsert.classList.remove('visivel');
         formRemover.classList.remove('visivel');
         formUpdate.classList.remove('visivel');
         formEntrada.classList.remove('visivel');
+        formPassword.classList.remove('visivel');
         overlay.classList.remove('visivel'); 
     }
 })
@@ -274,7 +282,11 @@ registrarAcoes({
         overlay.classList.toggle('visivel');
     },
     painelUsers(){window.location.href = 'painelUsuarios.php';},
-    resetPass(d){},
+    resetPass(d){
+        formPassword.value = d.codigo;
+        formPassword.classList.toggle('visivel');
+        overlay.classList.toggle('visivel');
+    },
     logoff(){window.location.href = 'logout.php';},
 });
 

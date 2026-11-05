@@ -144,7 +144,19 @@ require_once 'dropdown.php';
             </div>
         </form>
     </div>
-
+     <div id="form-password">
+        <h2>Redefinir Senha</h2>
+        <form method="POST" action="redefinir_senha.php">
+            <p>Digite a nova senha:</p>
+            <input type="password" placeholder="Nova senha..." name="nova_senha" id="entrada-nova-senha" required>
+            <p>Confirme a nova senha:</p>
+            <input type="password" placeholder="Confirmar senha..." name="confirmar_senha" id="entrada-confirmar-senha" required>
+            <div id="div-btn-form">
+                <input type="submit" value="Salvar" class="botao" id="btn-changPass">
+                <button type="button" class="botao" id="btn-cancelar-changePass">Cancelar</button>
+            </div>
+        </form>
+    </div>
     <!---------------------------- Lista de materiais do banco --------------------------->
     <div id="lista">
         <div id="div-filtro">
