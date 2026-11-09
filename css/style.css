@@ -601,6 +601,9 @@ select{
     margin:0;
     color:#000;
 }
+
+#msg-senha.ok {color: #2e7d32;}
+#msg-senha.erro {color: #aa3434;}
 /* ================= Form Update =================== */
 #form-update{
     display: none;

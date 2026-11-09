@@ -212,6 +212,40 @@ registrarAcoes({
         overlay.classList.toggle('visivel');
     },
     inicio(){window.location.href = 'index.php';},
-    resetPass(d){},
+    resetPass(d){
+        entradaCodigo.value = d.codigo;
+        form.classList.toggle('visivel');
+        overlay.classList.toggle('visivel');
+    },
     logoff(){window.location.href = 'logout.php';},
 });
+
+// ==========================================
+// Confirmação de senha
+// ==========================================
+
+const senha = document.getElementById('entrada-nova-senha');
+const confirmaSenha = document.getElementById('entrada-confirma-senha');
+const msgSenha = document.getElementById('msg-senha');
+
+function compararSenhas(){
+    //sem alerta enquanto a confirmação estiver vazia
+    if(confirmaSenha.value === ''){
+        msgSenha.textContent = '';
+        confirmaSenha.setCustomValidity('');
+        return;
+    }
+
+    if(senha.value === confirmaSenha.value){
+        msgSenha.textContent = 'As senhas coincidem.';
+        msgSenha.className = 'ok';
+        confirmaSenha.setCustomValidity('');
+    } else {
+        msgSenha.textContent = 'As senhas não coincidem.';
+        msgSenha.className = 'erro';
+        confirmaSenha.setCustomValidity('As senhas não coincidem.');
+    }
+}
+
+senha.addEventListener('input', compararSenhas);
+confirmaSenha.addEventListener('input', compararSenhas);

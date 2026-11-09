@@ -96,11 +96,12 @@ document.addEventListener('click', function(event) {
     const cliqueForaDoFormUpdate= !formUpdate.contains(event.target);
     const cliqueForaDoFormEntrada = !formEntrada.contains(event.target);
     const cliqueForaDoFormRemover = !formRemover.contains(event.target);
+    const cliqueForaDoFormPassword = !formPassword.contains(event.target);
     const cliqueForaDoBotaoAdicionar = !btnAdicionar.contains(event.target);
     const cliqueForaDoBotaoCancelarChangePass = !btnCancelarChangePass.contains(event.target);
     const cliqueForaDoBotaoUpdate = !event.target.closest('.btn-abrir-editar, .btn-abrir-entrada, .btn-abrir-saida');
 
-    if(cliqueForaDoFormInsert && cliqueForaDoBotaoAdicionar && cliqueForaDoFormUpdate && cliqueForaDoBotaoUpdate && cliqueForaDoFormEntrada && cliqueForaDoFormRemover && cliqueForaDoBotaoCancelarChangePass){
+    if(cliqueForaDoFormInsert && cliqueForaDoBotaoAdicionar && cliqueForaDoFormUpdate && cliqueForaDoBotaoUpdate && cliqueForaDoFormEntrada && cliqueForaDoFormRemover && cliqueForaDoBotaoCancelarChangePass && cliqueForaDoFormPassword){
         formInsert.classList.remove('visivel');
         formRemover.classList.remove('visivel');
         formUpdate.classList.remove('visivel');
@@ -290,3 +291,33 @@ registrarAcoes({
     logoff(){window.location.href = 'logout.php';},
 });
 
+
+// ==========================================
+// Confirmação de senha
+// ==========================================
+
+const senha = document.getElementById('entrada-nova-senha');
+const confirmaSenha = document.getElementById('entrada-confirmar-senha');
+const msgSenha = document.getElementById('msg-senha');
+
+function compararSenhas(){
+    //sem alerta enquanto a confirmação estiver vazia
+    if(confirmaSenha.value === ''){
+        msgSenha.textContent = '';
+        confirmaSenha.setCustomValidity('');
+        return;
+    }
+
+    if(senha.value === confirmaSenha.value){
+        msgSenha.textContent = 'As senhas coincidem.';
+        msgSenha.className = 'ok';
+        confirmaSenha.setCustomValidity('');
+    } else {
+        msgSenha.textContent = 'As senhas não coincidem.';
+        msgSenha.className = 'erro';
+        confirmaSenha.setCustomValidity('As senhas não coincidem.');
+    }
+}
+
+senha.addEventListener('input', compararSenhas);
+confirmaSenha.addEventListener('input', compararSenhas);    

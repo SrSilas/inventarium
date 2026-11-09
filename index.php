@@ -146,11 +146,12 @@ require_once 'dropdown.php';
     </div>
      <div id="form-password">
         <h2>Redefinir Senha</h2>
-        <form method="POST" action="redefinir_senha.php">
+        <form method="POST" action="trocaSenha.php">
             <p>Digite a nova senha:</p>
             <input type="password" placeholder="Nova senha..." name="nova_senha" id="entrada-nova-senha" required>
             <p>Confirme a nova senha:</p>
             <input type="password" placeholder="Confirmar senha..." name="confirmar_senha" id="entrada-confirmar-senha" required>
+            <small id="msg-senha"></small>
             <div id="div-btn-form">
                 <input type="submit" value="Salvar" class="botao" id="btn-changPass">
                 <button type="button" class="botao" id="btn-cancelar-changePass">Cancelar</button>
