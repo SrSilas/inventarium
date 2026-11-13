@@ -90,26 +90,19 @@ btnCancelarChangePass.addEventListener('click', function(){
 // ==========================================
 // Fechar Forms
 // =========================================='
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
+    const formularios = [formInsert, formUpdate, formEntrada, formRemover, formPassword];
 
-    const cliqueForaDoFormInsert = !formInsert.contains(event.target);
-    const cliqueForaDoFormUpdate= !formUpdate.contains(event.target);
-    const cliqueForaDoFormEntrada = !formEntrada.contains(event.target);
-    const cliqueForaDoFormRemover = !formRemover.contains(event.target);
-    const cliqueForaDoFormPassword = !formPassword.contains(event.target);
-    const cliqueForaDoBotaoAdicionar = !btnAdicionar.contains(event.target);
-    const cliqueForaDoBotaoCancelarChangePass = !btnCancelarChangePass.contains(event.target);
-    const cliqueForaDoBotaoUpdate = !event.target.closest('.btn-abrir-editar, .btn-abrir-entrada, .btn-abrir-saida');
+    const cliqueDentroDeForm = formularios.some(f => f && f.contains(event.target));
+    const cliqueEmGatilho    = (btnAdicionar && btnAdicionar.contains(event.target))
+                            || event.target.closest('.dropdown-opcao');
 
-    if(cliqueForaDoFormInsert && cliqueForaDoBotaoAdicionar && cliqueForaDoFormUpdate && cliqueForaDoBotaoUpdate && cliqueForaDoFormEntrada && cliqueForaDoFormRemover && cliqueForaDoBotaoCancelarChangePass && cliqueForaDoFormPassword){
-        formInsert.classList.remove('visivel');
-        formRemover.classList.remove('visivel');
-        formUpdate.classList.remove('visivel');
-        formEntrada.classList.remove('visivel');
-        formPassword.classList.remove('visivel');
-        overlay.classList.remove('visivel'); 
-    }
-})
+    // clicou dentro de um form ou no que abre um form: não fecha nada
+    if (cliqueDentroDeForm || cliqueEmGatilho) return;
+
+    formularios.forEach(f => f && f.classList.remove('visivel'));
+    overlay.classList.remove('visivel');
+});
 
 // ==========================================
 // Validação dos campos númericos

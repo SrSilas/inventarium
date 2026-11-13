@@ -117,6 +117,12 @@ require_once 'dropdown.php';
                             </div>
                         </th>
                     </tr>
+                    <?php
+                        //opções do dropdown
+                        $opcoes = [];
+                        $opcoes[] = ['acao' => 'editar', 'rotulo' => 'Editar'];
+                        $opcoes[] = ['acao' => 'reset', 'rotulo' => 'Resetar Senha'];
+                    ?>
                     <?php foreach ($users as $user): ?>
                         <tr>
                             <td id="td-user">
@@ -135,7 +141,16 @@ require_once 'dropdown.php';
                                 <div class="item">
                                     <span title="<?= $user['ds_email'] ?>"><?= $user['ds_email'] ?></span>
                                 </div>
-                                <div class="item-user">
+                                <?php
+                                    renderDropdown($opcoes, [
+                                        'codigo'     => $user['cd_usuario'],
+                                        'nome'       => $user['nm_usuario'],
+                                        'tipo'       => $user['ds_login'],
+                                        'quantidade' => $user['tp_usuario'],
+                                        'valor'      => $user['ds_email'],
+                                    ]);
+                                ?>
+                                <!-- <div class="item-user">
                                     <button type="button" class="btn-icon btn-menu-item"
                                         data-codigo="<?= htmlspecialchars($item['cd_usuario']) ?>"
                                         data-nome="<?= htmlspecialchars($item['nm_usuario']) ?>"
@@ -148,7 +163,7 @@ require_once 'dropdown.php';
                                         <button type="button" class="dropdown-opcao btn-editar-user">Editar</button>
                                         <button type="button" class="dropdown-opcao btn-reset-senha">Reset Senha</button>
                                     </div>
-                                </div>
+                                </div> -->
                             </td>
                         </tr> <?php endforeach ?>
                 </tbody>
